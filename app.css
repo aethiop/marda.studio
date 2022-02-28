@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+html,
+* {
+	font-family: "Space Mono", monospace;
+}
+.huef {
+	background: #4d79d8;
+	-webkit-animation: huef 9s infinite;
+	animation: huef 9s infinite;
+}
+@keyframes huef {
+	0% {
+		background-color: #4d79d8;
+	}
+	25% {
+		background-color: #33cc33;
+	}
+	50% {
+		background-color: #f2b919;
+	}
+	75% {
+		background-color: #ea3224;
+	}
+	100% {
+		background-color: #4d79d8;
+	}
+}
+@-webkit-keyframes huef {
+	0% {
+		background-color: #4d79d8;
+	}
+	25% {
+		background-color: #33cc33;
+	}
+	50% {
+		background-color: #f2b919;
+	}
+	75% {
+		background-color: #ea3224;
+	}
+	100% {
+		background-color: #4d79d8;
+	}
+}
+
+button {
+	padding: 1em;
+	background: transparent;
+	border: 1px solid white;
+	border-radius: 1.25em;
+	color: white;
+	margin: 0.5em;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+input {
+	padding: 0.75em;
+	background: transparent;
+	border-radius: 1.25em;
+	color: white;
+	cursor: pointer;
+}
+button:hover,
+input:hover {
+	background: white;
+	color: black;
+	transform: scale(1.03);
+}
+
+.air {
+	padding-top: 9%;
+}
+.yak button {
+	font-size: 80%;
+}
+
+.wag {
+	-webkit-animation: wag 3s infinite;
+	animation: wag 3s infinite;
+}
+@keyframes wag {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(-1deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes print {
+	0% {
+		overflow: hidden;
+		height: 0vh;
+	}
+	99% {
+		overflow: hidden;
+		height: 100vh;
+	}
+	100% {
+		overflow: visible;
+		height: auto;
+	}
+}
+input {
+	outline: none;
+}
+/* .meta-on,
+div:hover,
+ul:hover,
+ol:hover,
+li:hover,
+p:hover,
+span:hover,
+form:hover,
+button:hover,
+input:hover,
+textarea:hover,
+img:hover {
+	outline: 1px solid;
+	animation: meta-on 3s infinite;
+	transition: ease-in-out;
+} */
+/* meta on should be visible animation at all contrast colors */
+/* @keyframes meta-on {
+	0% {
+		outline-color: gainsboro;
+	}
+	33% {
+		outline-color: white;
+	}
+	66% {
+		outline-color: gray;
+	}
+	100% {
+		outline-color: gainsboro;
+	}
+} */
