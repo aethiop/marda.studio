@@ -22,15 +22,21 @@ meta.edit({
 	on: function (eve) {
 		// TODO: We still need to add to meta API ability to change name.
 		if (song.play) {
-			console.log("song.now: ", song.now);
 			music.stop();
 			song.play = false;
+			return;
 		}
-		music.stop();
 		song.play = true;
+		music.stop();
 		setTimeout(function () {
-			song.now = wave($("#page").text()).play();
-		}, 200);
+			var node = $(meta.tap.on);
+			var tag = node.get(0).tagName;
+			console.log(tag);
+			if (tag != "TEXTAREA") {
+				return;
+			}
+			song.now = wave(node.val()).play();
+		}, 250);
 	},
 });
 
@@ -38,11 +44,9 @@ meta.edit({
 	name: "Blur",
 	combo: ["M", "B"],
 	on: function (eve) {
-		var on = meta.tap(),
-			was = on.width();
 		$(document).on("mousemove.tmp", function (eve) {
-			var long = Math.mix(0, 3, eve.pageX / $("body").innerWidth());
-			song.now.long(long);
+			var x = eve.pageX;
+			song.now.loud(x / $("body").innerWidth());
 		});
 	},
 	up: function () {
@@ -50,54 +54,9 @@ meta.edit({
 	},
 });
 
-meta.edit({
-	name: "Vary",
-	combo: ["M", "V"],
-	on: function (eve) {
-		var on = meta.tap(),
-			was = on.width();
-		$(document).on("mousemove.tmp", function (eve) {
-			var vary = Math.mix(0, 1, eve.pageX / $("body").innerWidth());
-			song.now.vary(vary);
-		});
-	},
-	up: function () {
-		$(document).off(".tmp");
-	},
-});
-
-meta.edit({
-	name: "Shout",
-	combo: ["M", "S"],
-
-	on: function (eve) {
-		var on = meta.tap(),
-			was = on.width();
-		$(document).on("mousemove.tmp", function (eve) {
-			var loud = Math.mix(0, 1, eve.pageX / $("body").innerWidth());
-			song.now.loud(loud);
-		});
-	},
-	up: function () {
-		$(document).off(".tmp");
-	},
-});
-meta.edit({
-	name: "Itch",
-	combo: ["M", "I"],
-
-	on: function (eve) {
-		var on = meta.tap(),
-			was = on.width();
-		$(document).on("mousemove.tmp", function (eve) {
-			var itch = Math.mix(0, 1, eve.pageX / $("body").innerWidth());
-			song.now.itch(itch);
-		});
-	},
-	up: function () {
-		$(document).off(".tmp");
-	},
-});
 $(document).on("keydown", function (eve) {
-	music.play(String.fromCharCode(eve.which));
+	if (eve.which === music.which) {
+		return;
+	}
+	music.play(String.fromCharCode((music.which = eve.which)));
 });

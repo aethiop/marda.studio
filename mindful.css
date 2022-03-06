@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 html,
 * {
-	font-family: "Space Mono", monospace;
+	font-family: "Nunito", sans-serif;
 }
 .huef {
 	background: #4d79d8;
@@ -87,13 +87,13 @@ input {
 	padding: 0.5em 1em;
 	background: transparent;
 	border-radius: 0.75em;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 }
 button:hover,
 input:hover {
-	background: white;
-	color: black;
+	background: #353535;
+	color: #fff;
 	transform: scale(1.03);
 }
 
@@ -162,7 +162,7 @@ input {
 	background: #d3a438;
 }
 .black {
-	background: black;
+	background: #212121;
 }
 .white {
 	background: white;
@@ -181,23 +181,17 @@ input {
 	border-color: #d3a438;
 }
 .blacks {
-	border-color: black;
+	border-color: #212121;
 }
 .whites {
 	border-color: white;
 }
 
 .shade {
-	background: #161616;
+	background: rgba(0%, 0%, 0%, 0.4);
 }
 .tint {
 	background: rgba(100%, 100%, 100%, 0.1);
-}
-.surfacet {
-	color: #707070;
-}
-.surfacet {
-	border-color: #707070;
 }
 
 .redt {
@@ -213,12 +207,17 @@ input {
 	color: #d3a438;
 }
 .blackt {
-	color: black;
+	color: #212121;
 }
 .whitet {
 	color: white;
 }
-
+.surfacet {
+	color: #707070;
+}
+.surfacet {
+	border-color: #707070;
+}
 .hue {
 	background: #4d79d8;
 	-webkit-animation: hue 900s infinite;

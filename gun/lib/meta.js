@@ -181,7 +181,7 @@
 		return on;
 	};
 
-	$(window).on("blur", k.wipe).on("focus", k.wipe);
+	// $(window).on("blur", k.wipe).on("focus", k.wipe);
 	$(document)
 		.on("mousedown mousemove mouseup", function (eve) {
 			m.tap.eve = eve;
@@ -198,7 +198,9 @@
 			m.tap.edit = null;
 		});
 	$(document).on("touchstart", "#meta .meta-start", function (eve) {
-		m.tap.stun = true;
+		if (m.tap.stun) {
+			return (m.tap.stun = false);
+		}
 	});
 	$(document).on("click", "#meta .meta-menu li", function (eve) {
 		if (m.tap.stun) {

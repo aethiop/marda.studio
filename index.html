@@ -8,53 +8,101 @@
   <title>Marda Studio</title>
   <script src="./gun/examples/jquery.js"></script>
   <link rel="stylesheet" href="./style.css" />
-  <link type="peer" href="http://localhost:8765/gun">
+  <link id="theme" rel="stylesheet" href="./dark-paper.css" />
+  <!-- <link rel="stylesheet" href="./app.css" /> -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link type="peer" href="https://marda.herokuapp.com/gun">
 </head>
 
 <body class="black whitet">
-  <div id="app" class="hold full">
-    <link rel="stylesheet" href="./app.css" />
-    <div id="welcome" class="page full hold center ">
-      <h2>Welcome to Marda Studios</h2>
-      <p class="gap">We believe in giving users control over their platforms. We build
-        decentralized
-        applications that are owned and controlled by the people who use them. </p>
+  <!-- <div id="player"
+      style="position: fixed; width: 0.3em; height: 0.3em; background: white; left: 50%; top: 50%; border-radius: 100%;">
+    </div> -->
+  <div id="app" x-data="app" class="hold">
 
-      <ul class="left gap">
-        <li class="crack">
-          The first
-          and most important rule is that users must be in control. The platforms and applications we build must be
-          owned
-          and
-          operated by the people who use them.
-        </li>
-        <li class="crack">
-          The second rule is that all data must be open and accessible. This is vitally important for ensuring
-          transparency
-          and
-          accountability. </li>
+    <div id="welcome"
+      x-data="{name: '', register() {JOY.auth(this.name, true)}, login(t) {JOY.auth(JSON.parse(t))}, get paste(){navigator.clipboard.readText().then(text => {this.login(text) })}}"
+      class=" page full middle">
 
-        <li class="crack">
-          Finally, we must always remember that we are building this internet for the people, by the people. We must put
-          the needs
-          of the users first and always remember that technology is only a tool; it is the people who use it that make
-          it great.
-        </li>
-      </ul>
-      <form id="get-started" class="center">
-        <input placeholder="Enter your name" id="username" style="width: 50%;">
-        <input type="submit" value="Get Started">
+      <form @submit.prevent="register" id="sign-up" class="center">
+        <input class="center focus" x-model="name" type="text" id="name" placeholder="What's your name?" />
       </form>
-      </form>
+      <a :class="!name ? 'model' : ''" id="enter"><button @click="register" class="surfacet center black">⏎ or
+          Click to
+          start</button></a>
+      <a class=""><button class=" surfacet papers center black yak" @click="paste">⌘ + V
+          or
+          Click to Paste
+          your Key</button></a>
+      <script>
+        function load(src, cb) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.async = true;
+          s.onload = cb;
+          document.body.appendChild(s);
+        }
+
+        load("./apps/welcome.js")
+      </script>
     </div>
-    <div id="page" class="page full hold gap">
+    <!-- <p class="center loud crack gap">
+  Hello {{ username || "Friend" }}!
+</p>
+<form id="sign-up" class="center">
+  <input name="username" class="unit col center rim crack" placeholder="Type your name..." id="username" />
+</form>
+<div class="center rim">
+  <p class="{{ username || 'visually-hidden' }} blue unit gap sap">Press Enter</p>
+</div>
+<div class="center">
+  <button class=" unit stroke ">Paste</button>
+</div> -->
+
+    <div id="home" class="page full hold gap ">
+      <div id="nav" class=" unit row  center ">
+        <p class="left  center loud unit">.<span class="surfacet username"></span></p>
+        <div class="unit right">
+          <img style="width:2.5em; height:2.5em;" class="avatar red sap-sm " />
+        </div>
+      </div>
+      <div id="pages" class="focus hold">
+      </div>
+
     </div>
+    <div id="page" class="page hold ">
+      <div id="player" style="position: fixed; width: 0.5em; height: 0.5em; background: white; left: 50%; top: 50%; border-radius:
+      100%;"></div>
+      <div id="nav" class=" unit row center ">
+        <p class="left gap center loud unit">page.<span class="surfacet username"></span></p>
+        <div class="unit  gap right">
+          <img style="width:2.5em; height:2.5em;" class="avatar red sap-sm " />
+        </div>
+      </div>
+      <div id="paper" class="rim leak sap-sm shade">
+        <div id="extra" class="row right rim surfacet visually-hidden">
+          <p><span class="username center unit"></span>
+            # <span id="hash" class=" center unit"></span></p>
+        </div>
+        <div id="content" class=" focus gap" style="width: 100%">
+        </div>
+      </div>
+    </div>
+
     <script src="./gun/gun.js"></script>
     <script src="./gun/sea.js"></script>
     <script src="./gun/lib/monotype.js"></script>
     <script src="./gun/lib/normalize.js"></script>
-    <!-- <script src="./lib/meta.ui.js"></script> -->
-    <script src="./index.js"></script>
+    <script src="./gun/lib/wave.js"></script>
+    <script src="./gun/lib/meta.js"></script>
+    <script src="./gun/as.js"></script>
+    <script src="./lib/joy.js"></script>
+    <script src="./apps/player.js"></script>
+    <script src="./lib/meta.ui.js"></script>
+    <script src="./lib/include.js"></script>
+    <script>
+    </script>
+
   </div>
 </body>
 
