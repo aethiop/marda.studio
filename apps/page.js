@@ -54,11 +54,13 @@ $(function () {
 		"keyup",
 		"[contenteditable]",
 		page.wait(function () {
-			var hash = $("#hash").text();
+			console.log("keyup");
+			console.log(page.hash);
+			// var hash = $("#hash").text();
 			var el = $(this);
 			var data = el.html();
-			console.log(hash, data);
-			gun.user().get("pages").get(hash).put(data);
+			console.log(page.hash, data);
+			// gun.user().get("pages").get().put(data);
 		}, 100)
 	);
 	m.text.editor = function (opt, as) {

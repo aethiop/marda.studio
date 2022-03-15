@@ -194,7 +194,8 @@ input {
 	background-color: #121212;
 }
 .shade {
-	background: rgba(0%, 0%, 0%, 0.4);
+	background: #121212;
+	box-shadow: 20px 20px 60px #070707, -20px -20px 60px #1d1d1d;
 }
 .tint {
 	background: rgba(100%, 100%, 100%, 0.1);
@@ -225,7 +226,9 @@ input {
 	border-color: #707070;
 }
 .surface {
-	background-color: #707070;
+	border-radius: 50px;
+	background: #121212;
+	box-shadow: 20px 20px 60px #070707, -20px -20px 60px #1d1d1d;
 }
 .hue {
 	background: #4d79d8;
@@ -590,9 +593,6 @@ input {
 	padding: 0;
 	position: absolute;
 	width: 1px;
-}
-ul {
-	list-style: disc;
 }
 
 /* .meta-on,

@@ -131,22 +131,24 @@
 			$ul.children(".meta-none").remove();
 		}, 250); // necessary fix for weird bug glitch
 		$.each(l, function (i, k) {
-			$ul.append($("<li>").text(k.name));
+			$li = $("<li>").html(k.name);
+			$li.get(0).style.setProperty("--meta-key", i);
+			$ul.append($li);
 		});
 		if (opt) {
 			m.flip(true);
 		}
-		$ul.append(
-			$("<li>")
-				.html("&larr;")
-				.one("click", function () {
-					m.list((k.at = at.back));
-				})
-		);
+		// $ul.append(
+		// 	$("<li>")
+		// 		.html("&larr;")
+		// 		.one("click", function () {
+		// 			m.list((k.at = at.back));
+		// 		})
+		// );
 	};
 	m.ask = function (help, cb) {
 		var $ul = $("#meta .meta-menu ul").empty();
-		var $put = $("<input>")
+		var $put = $("<input class='min'>")
 			.attr("id", "meta-ask")
 			.attr("placeholder", help);
 		var $form = $("<form>")
@@ -242,4 +244,31 @@
 	$.fn.or = function (s) {
 		return this.length ? this : $(s || "body");
 	};
+	var m = meta,
+		k = m.key;
+	//$(window).on('focus', k.wipe.bind(null, false)); // .on('blur', k.wipe.bind(null, false))
+	$(document).on("mousedown mousemove mouseup", function (eve) {
+		m.tap.eve = eve;
+		m.tap.x = eve.pageX || 0;
+		m.tap.y = eve.pageY || 0;
+		m.tap.on = $(eve.target);
+	});
+	var [start, end] =
+		"ontouchstart" in window
+			? ["touchstart", "touchend"]
+			: ["mousedown", "mouseup"];
+	$(document).on(start, "#meta .meta-menu li", function (eve) {
+		var combo = $(this).data().combo;
+		eve.fake = eve.which =
+			combo && combo.slice(-1)[0].toUpperCase().charCodeAt(0);
+		eve.tap = true;
+		k.down(eve);
+		$(document).one(end, () => k.up(eve));
+		return;
+	});
+	$(document).on("keydown", k.down).on("keyup", k.up);
+	$("#meta").on(start, function (ev) {
+		if (ev.target.tagName == "LI" || ev.target.tagName == "UL") return;
+		meta.flip();
+	});
 })();

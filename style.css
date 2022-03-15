@@ -166,7 +166,7 @@ p + p {
 	line-height: 0;
 }
 .crack {
-	margin-bottom: 1%;
+	margin-bottom: 4%;
 }
 .sit {
 	margin-bottom: 0;
@@ -205,7 +205,7 @@ p + p {
 	border-radius: 1.75em;
 }
 .sap-sm {
-	border-radius: 1em;
+	border-radius: 0.5em;
 }
 .jot {
 	border-bottom: 1px dashed #95b2ca;
@@ -217,4 +217,36 @@ p + p {
 .shout {
 	font-size: 36pt;
 	font-size: 6.5vmax;
+}
+
+.it {
+	background-color: #f0f0f0;
+	color: #000;
+}
+
+@keyframes animateIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.2) translateY(1em);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2) translateY(-0.5em);
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes animateOut {
+	0% {
+		opacity: 0;
+		transform: scale(0.2) translateY(1em);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+	100% {
+		opacity: 1;
+	}
 }

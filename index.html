@@ -9,41 +9,37 @@
   <script src="./gun/examples/jquery.js"></script>
   <link rel="stylesheet" href="./style.css" />
   <link id="theme" rel="stylesheet" href="./dark-paper.css" />
+  <script src="https://kit.fontawesome.com/478ca05d96.js" crossorigin="anonymous"></script>
   <!-- <link rel="stylesheet" href="./app.css" /> -->
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link type="peer" href="https://marda.herokuapp.com/gun">
 </head>
 
-<body class="black whitet">
-  <!-- <div id="player"
-      style="position: fixed; width: 0.3em; height: 0.3em; background: white; left: 50%; top: 50%; border-radius: 100%;">
-    </div> -->
+<body class="background whitet">
+
   <div class="hold">
+    <div id="app" class="page full center hold gap unit">
+      <!-- App Bar -->
+      <div id="nav" class="unit row ">
+      </div>
+      <div class="rim unit col sap-sm stroke surfaces">
+        <h2 class="center">Quick Commands</h2>
+        <div class="sap-sm gap right">
 
-    <div id="welcome"
-      x-data="{name: '', register() {JOY.auth(this.name, true)}, login(t) {JOY.auth(JSON.parse(t))}, get paste(){navigator.clipboard.readText().then(text => {this.login(text) })}}"
-      class="page full middle">
-
-      <form @submit.prevent="register" id="sign-up" class="center">
-        <input class="center focus" x-model="name" type="text" id="name" placeholder="What's your name?" />
-      </form>
-      <a :class="!name ? 'model' : ''" id="enter"><button @click="register" class="surfacet center black">⏎ or
-          Click to
-          start</button></a>
-      <a class=""><button class=" surfacet papers center black yak" @click="paste">⌘ + V
-          or
-          Click to Paste
-          your Key</button></a>
-    </div>
-    <div id="app" class="page full hold gap ">
-      <div id="nav" class=" unit row  center ">
-        <p class="left  center loud unit">.<span class="surfacet username"></span></p>
-        <div class="unit right">
-          <img style="width:2.5em; height:2.5em;" class="avatar red sap-sm " />
+          <p class="crack surfacet">Show / Hide Commands <span class="gap"><kbd>Ctrl</kbd> <span class="gap">or</span>
+              <kbd>⌘</kbd></span></p>
+          <p class="crack surfacet">Show Keyboard Shortcut<span class="gap"><kbd>Shift</kbd></span>
+          <p class="crack surfacet">New Paper<span class="gap"><kbd>N</kbd></span>
+          <p class="crack surfacet">Hold (Typing)<span class="gap"><kbd>Ctrl</kbd></span>
+          </p>
         </div>
       </div>
+      <!-- App -->
+      <ul id="papers" class="rim unit sap-sm stroke surfaces col top hide">
+        <h2 class="center ">Recents</p>
+      </ul>
+
     </div>
   </div>
+
   <script src="./gun/gun.js"></script>
   <script src="./gun/sea.js"></script>
   <script src="./gun/lib/monotype.js"></script>
@@ -51,6 +47,7 @@
   <script src="./gun/lib/wave.js"></script>
   <script src="./gun/lib/meta.js"></script>
   <!-- <script src="./gun/as.js"></script> -->
+  <script src="./lib/tmpl.js"></script>
   <script src="./lib/joy.js"></script>
   <script src="./lib/meta.ui.js"></script>
   <script src="./apps/home.js"></script>
