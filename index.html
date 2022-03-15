@@ -18,11 +18,11 @@
   <!-- <div id="player"
       style="position: fixed; width: 0.3em; height: 0.3em; background: white; left: 50%; top: 50%; border-radius: 100%;">
     </div> -->
-  <div id="app" x-data="app" class="hold">
+  <div class="hold">
 
     <div id="welcome"
       x-data="{name: '', register() {JOY.auth(this.name, true)}, login(t) {JOY.auth(JSON.parse(t))}, get paste(){navigator.clipboard.readText().then(text => {this.login(text) })}}"
-      class=" page full middle">
+      class="page full middle">
 
       <form @submit.prevent="register" id="sign-up" class="center">
         <input class="center focus" x-model="name" type="text" id="name" placeholder="What's your name?" />
@@ -34,74 +34,28 @@
           or
           Click to Paste
           your Key</button></a>
-      <script>
-        function load(src, cb) {
-          var s = document.createElement('script');
-          s.src = src;
-          s.async = true;
-          s.onload = cb;
-          document.body.appendChild(s);
-        }
-
-        load("./apps/welcome.js")
-      </script>
     </div>
-    <!-- <p class="center loud crack gap">
-  Hello {{ username || "Friend" }}!
-</p>
-<form id="sign-up" class="center">
-  <input name="username" class="unit col center rim crack" placeholder="Type your name..." id="username" />
-</form>
-<div class="center rim">
-  <p class="{{ username || 'visually-hidden' }} blue unit gap sap">Press Enter</p>
-</div>
-<div class="center">
-  <button class=" unit stroke ">Paste</button>
-</div> -->
-
-    <div id="home" class="page full hold gap ">
+    <div id="app" class="page full hold gap ">
       <div id="nav" class=" unit row  center ">
         <p class="left  center loud unit">.<span class="surfacet username"></span></p>
         <div class="unit right">
           <img style="width:2.5em; height:2.5em;" class="avatar red sap-sm " />
         </div>
       </div>
-      <div id="pages" class="focus hold">
-      </div>
-
     </div>
-    <div id="page" class="page hold ">
-      <div id="player" style="position: fixed; width: 0.5em; height: 0.5em; background: white; left: 50%; top: 50%; border-radius:
-      100%;"></div>
-      <div id="nav" class=" unit row center ">
-        <p class="left gap center loud unit">page.<span class="surfacet username"></span></p>
-        <div class="unit  gap right">
-          <img style="width:2.5em; height:2.5em;" class="avatar red sap-sm " />
-        </div>
-      </div>
-      <div id="paper" class="rim leak sap-sm shade">
-        <div id="extra" class="row right rim surfacet visually-hidden">
-          <p><span class="username center unit"></span>
-            # <span id="hash" class=" center unit"></span></p>
-        </div>
-        <div id="content" class=" focus gap" style="width: 100%">
-        </div>
-      </div>
-    </div>
-
-    <script src="./gun/gun.js"></script>
-    <script src="./gun/sea.js"></script>
-    <script src="./gun/lib/monotype.js"></script>
-    <script src="./gun/lib/normalize.js"></script>
-    <script src="./gun/lib/wave.js"></script>
-    <script src="./gun/lib/meta.js"></script>
-    <script src="./gun/as.js"></script>
-    <script src="./lib/joy.js"></script>
-    <script src="./apps/player.js"></script>
-    <script src="./lib/meta.ui.js"></script>
-    <script src="./lib/include.js"></script>
-    <script>
-    </script>
+  </div>
+  <script src="./gun/gun.js"></script>
+  <script src="./gun/sea.js"></script>
+  <script src="./gun/lib/monotype.js"></script>
+  <script src="./gun/lib/normalize.js"></script>
+  <script src="./gun/lib/wave.js"></script>
+  <script src="./gun/lib/meta.js"></script>
+  <!-- <script src="./gun/as.js"></script> -->
+  <script src="./lib/joy.js"></script>
+  <script src="./lib/meta.ui.js"></script>
+  <script src="./apps/home.js"></script>
+  <script>
+  </script>
 
   </div>
 </body>

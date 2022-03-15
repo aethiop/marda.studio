@@ -120,7 +120,8 @@ $(function () {
 	); // -1 is key for typing.
 	meta.text.it[-1] = meta.text.it;
 	document.execCommand("defaultParagraphSeparator", false, "p");
-
+	if (location.hash !== "#page") return;
+	meta.key.wipe();
 	meta.edit({
 		name: "Edit",
 		combo: ["E"],
