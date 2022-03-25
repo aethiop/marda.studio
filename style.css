@@ -7,6 +7,9 @@ body {
 	/* font-size: 18pt; */
 	font-size: max(14pt, 1vw);
 }
+h1 {
+	margin: 0;
+}
 blockquote {
 	border-left: 3px solid #000;
 	margin-left: calc(-0.75em - 3px);
@@ -195,7 +198,25 @@ p + p {
 	transition: all 0.3s;
 	cursor: pointer;
 }
-
+.act:hover {
+	color: #fff;
+	background: #121212;
+}
+.wag {
+	-webkit-animation: wag 3s infinite;
+	animation: wag 3s infinite;
+}
+@keyframes wag {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(-1deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
 .unit,
 .symbol {
 	display: inline-block;
@@ -205,12 +226,47 @@ p + p {
 	border-radius: 1.75em;
 }
 .sap-sm {
-	border-radius: 0.5em;
+	border-radius: 0.7em;
 }
 .jot {
 	border-bottom: 1px dashed #95b2ca;
 }
-
+.flex {
+	display: flex;
+}
+.frow {
+	flex-direction: row;
+}
+.fcol {
+	flex-direction: column;
+}
+.fwrap {
+	flex-wrap: wrap;
+}
+.fnowrap {
+	flex-wrap: nowrap;
+}
+.fjustify {
+	justify-content: space-between;
+}
+.fcenter {
+	align-items: center;
+}
+.fleft {
+	align-items: flex-start;
+}
+.fright {
+	align-items: flex-end;
+}
+.fjustify-around {
+	justify-content: space-around;
+}
+.fjustify-between {
+	justify-content: space-between;
+}
+.fjustify-evenly {
+	justify-content: space-evenly;
+}
 .loud {
 	font-size: 150%;
 }

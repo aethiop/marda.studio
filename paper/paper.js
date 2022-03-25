@@ -1,10 +1,12 @@
 $(function () {
 	var page = {};
-
 	page.render = async (obj, who) => {
 		if (who == "me") {
 			var mine = await gun.user().get("papers").get(obj.hash).get(obj.id);
 			mine?.content && $("#content").html(mine.content);
+			// mine?.title
+			// 	? $("#title").html(mine.title)
+			// 	: $("#title").html("Untitled");
 		} else {
 			gun.get("~" + obj.author)
 				.get("papers")
@@ -23,8 +25,7 @@ $(function () {
 			var author = await gun.get("marda.studio#").get(page.hash);
 			var key = JOY.key();
 			if (author === key.pub) {
-				//
-				console.log("author, author is: ", author);
+				// console.log("author, author is: ", author);
 				page.render({ id: page.id, hash: page.hash }, "me");
 				// Show Keyboard shortcuts
 				meta.edit({
@@ -34,10 +35,17 @@ $(function () {
 						$(".key-none").toggle();
 					},
 				});
-
 				// Show Keyboard shortcuts
 				meta.edit({
 					combo: [-1, "G", 16],
+					fake: -1,
+					on: async function (e) {
+						$(".key-none").toggle();
+					},
+				});
+				// Show Keyboard shortcuts
+				meta.edit({
+					combo: [-1, 189, 16],
 					fake: -1,
 					on: async function (e) {
 						$(".key-none").toggle();
@@ -49,9 +57,23 @@ $(function () {
 					name: JOY.icon("pen-to-square", "solid", "E"),
 					combo: ["E"],
 					on: function () {
+						console.log("CLICKED");
 						$("#content").attr("contenteditable", true);
-						if ($("#content").attr("contenteditable"))
-							$("#content").focus();
+						$("#content").focus();
+						// if ($(".editable").attr("contenteditable"))
+						// 	$(".editable").focus();
+						// $("article").attr(
+						// 	"contenteditable",
+						// 	"true" == $("article").attr("contenteditable")
+						// 		? false
+						// 		: true
+						// );
+						// $("header").attr(
+						// 	"contenteditable",
+						// 	"true" == $("header").attr("contenteditable")
+						// 		? false
+						// 		: true
+						// );
 					},
 					use: function () {},
 					up: function () {},
@@ -87,7 +109,7 @@ $(function () {
 			to = setTimeout(function () {
 				cb.call(me, a, b, c);
 				page.typing = me = false;
-			}, wait || 200);
+			}, wait || 75);
 		};
 	};
 	var monotype =
@@ -150,15 +172,23 @@ $(function () {
 				.get(page.id)
 				.get("content")
 				.put(data);
-			var when = new Date().toUTCString();
+			var when = gun
+				.user()
+				.get("papers")
+				.get(page.hash)
+				.get(page.id)
+				.get("last");
+			var now = new Date().toLocaleString();
 			await gun
 				.user()
 				.get("papers")
 				.get(page.hash)
 				.get(page.id)
 				.get("last")
-				.put(when);
-		}, 100)
+				.put(now);
+			console.log(when);
+			$("#last").text(now);
+		}, 75)
 	);
 	m.text.editor = function (opt, as) {
 		var tmp;
@@ -229,12 +259,23 @@ $(function () {
 
 	// Exit to home
 	meta.edit({
-		name: JOY.icon("home", "solid", "ESC"),
 		combo: [27],
 		on: function () {
 			location.href = "/";
 		},
-		use: function () {},
+	});
+
+	meta.edit({
+		name: JOY.icon("eye-dropper", "solid", "C"),
+		combo: [-1, "C"],
+		fake: -1,
+		on: function (eve) {
+			meta.ask("Color or Hex", function (color) {
+				// if (!meta.text.editor("HiliteColor", false, colour)) {
+				meta.text.editor("foreColor", color, false);
+				// }
+			});
+		},
 		up: function () {},
 	});
 
@@ -247,7 +288,6 @@ $(function () {
 			e.preventDefault();
 
 			$("#content").attr("contenteditable", "false");
-			console.log($("#content").html());
 		},
 		use: function () {},
 		up: function () {},
@@ -261,9 +301,7 @@ $(function () {
 		on: function (eve) {
 			meta.text.editor("bold");
 		},
-		up: function () {
-			console.log("Bold up");
-		},
+		up: function () {},
 	});
 
 	// Italic
@@ -279,9 +317,9 @@ $(function () {
 
 	// Strikethrough
 	meta.edit({
-		name: JOY.icon("strikethrough", "solid", "S"),
-		combo: [-1, "S"],
-		fake: -1,
+		name: JOY.icon("strikethrough", "solid", "/"),
+		combo: [-1, 191],
+		// fake: -1,
 		on: function (eve) {
 			meta.text.editor("strikethrough");
 		},
@@ -308,20 +346,6 @@ $(function () {
 	// Show Align Menu
 	// meta.edit({ name: "aliGn", combo: [-1, "A"] }); // MOVE TO ADVANCED MENu!
 
-	// meta.edit({
-	// 	name: JOY.icon("eye-dropper", "solid", "C"),
-	// 	combo: [-1, "A", "C"],
-	// 	fake: -1,
-	// 	on: function (eve) {
-	// 		meta.ask("Color or Hex", function (color) {
-	// 			// if (!meta.text.editor("HiliteColor", false, colour)) {
-	// 			meta.text.editor("foreColor", color, false);
-	// 			// }
-	// 		});
-	// 	},
-	// 	up: function () {},
-	// });
-
 	// Indentation menu
 	// meta.edit({
 	// 	name: JOY.icon("indent", "solid", "Tab"),
@@ -347,7 +371,8 @@ $(function () {
 	// Space for paragraph
 
 	meta.edit({
-		combo: [-1, "U"],
+		name: JOY.icon("indent", "solid", "]"),
+		combo: [-1, 221],
 		fake: -1,
 		on: function (eve) {
 			// if (!meta.text.editor("HiliteColor", false, colour)) {
@@ -358,8 +383,8 @@ $(function () {
 	});
 
 	meta.edit({
-		combo: [-1, "Y"],
-		fake: -1,
+		name: JOY.icon("outdent", "solid", "["),
+		combo: [-1, 219],
 		on: function (eve) {
 			// if (!meta.text.editor("HiliteColor", false, colour)) {
 
@@ -367,40 +392,46 @@ $(function () {
 		},
 		up: function () {},
 	});
-	meta.edit({
-		name: JOY.icon("list-ul", "solid", "L"),
-		combo: [-1, "L"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("insertUnorderedList");
-		},
-		up: function () {},
-	});
-	meta.edit({
-		name: JOY.icon("list-ol", "solid", "J"),
-		combo: [-1, "J"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("insertOrderedList");
-		},
-		up: function () {},
-	});
 
-	// meta.edit({
-	// 	name: JOY.icon("highlighter", "solid", "C"),
-	// 	combo: [-1, "C"],
-	// 	fake: -1,
-	// 	on: function (eve) {
-	// 		meta.ask("Color or Hex", function (color) {
-	// 			// if (!meta.text.editor("HiliteColor", false, colour)) {
-	// 			meta.text.editor("backColor", color);
-	// 			// }
-	// 		});
-	// 	},
-	// 	up: function () {},
-	// });
+	meta.edit({
+		name: JOY.icon("highlighter", "solid", "H"),
+		combo: [-1, "H"],
+		fake: -1,
+		on: function (eve) {
+			meta.ask("Color or Hex", function (color) {
+				// if (!meta.text.editor("HiliteColor", false, colour)) {
+				meta.text.editor("backColor", color);
+				// }
+			});
+		},
+		up: function () {},
+	});
 
 	// ADVANCED MENU
+	meta.edit({
+		name: JOY.icon("angle-right", "solid", "G"),
+		combo: [-1, "G"],
+		fake: -1,
+	});
+
+	meta.edit({
+		name: JOY.icon("list-ul", "solid", "="),
+		combo: [-1, "G", 187],
+		fake: -1,
+		on: function (eve) {
+			meta.text.editor("insertunorderedlist");
+		},
+		up: function () {},
+	});
+	meta.edit({
+		name: JOY.icon("list-ol", "solid", "="),
+		combo: [-1, "G", 48],
+		fake: -1,
+		on: function (eve) {
+			meta.text.editor("insertorderedlist");
+		},
+		up: function () {},
+	});
 	meta.edit({
 		name: JOY.icon("align-left", "solid", "L"),
 		combo: [-1, "G", "L"],
@@ -441,21 +472,23 @@ $(function () {
 	// Align Number
 	// Align Points
 	// Align Strike
-
+	meta.edit({
+		name: JOY.icon("font", "solid", "A"),
+		combo: [-1, "A"],
+		fake: -1,
+	});
 	meta.edit({
 		name: "Small",
-		combo: [-1, "V", "S"],
+		combo: [-1, "A", "S"],
 		fake: -1,
 		on: function (eve) {
-			console.log("Small");
-			console.log(eve);
 			meta.text.editor("fontSize", 2);
 		},
 		up: function () {},
 	});
 	meta.edit({
 		name: "Normal",
-		combo: [-1, "V", "N"],
+		combo: [-1, "A", "N"],
 		fake: -1,
 		on: function (eve) {
 			meta.text.editor("fontSize", 5);
@@ -464,7 +497,7 @@ $(function () {
 	});
 	meta.edit({
 		name: "Header",
-		combo: [-1, "V", "H"],
+		combo: [-1, "A", "H"],
 		fake: -1,
 		on: function (eve) {
 			meta.text.editor("fontSize", 6);
@@ -473,7 +506,7 @@ $(function () {
 	});
 	meta.edit({
 		name: "Title",
-		combo: [-1, "V", "T"],
+		combo: [-1, "A", "T"],
 		fake: -1,
 		on: function (eve) {
 			meta.text.editor("fontSize", 7);

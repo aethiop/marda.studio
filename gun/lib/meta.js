@@ -185,13 +185,13 @@
 
 	// $(window).on("blur", k.wipe).on("focus", k.wipe);
 	$(document)
-		.on("mousedown mousemove mouseup", function (eve) {
+		.on("mousedown mousemove mouseup touchstart touchend", function (eve) {
 			m.tap.eve = eve;
 			m.tap.x = eve.pageX || 0;
 			m.tap.y = eve.pageY || 0;
 			m.tap.on = $(eve.target);
 		})
-		.on("mousedown touchstart", function (eve) {
+		.on("mousedown touchend", function (eve) {
 			var tmp = m.tap.edit;
 			if (!tmp || !tmp.on) {
 				return;
@@ -199,7 +199,7 @@
 			tmp.on(eve);
 			m.tap.edit = null;
 		});
-	$(document).on("touchstart", "#meta .meta-start", function (eve) {
+	$(document).on("touchend", "#meta .meta-start", function (eve) {
 		if (m.tap.stun) {
 			return (m.tap.stun = false);
 		}
