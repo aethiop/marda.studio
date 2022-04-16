@@ -1,12 +1,11 @@
 $(function () {
 	var page = {};
+	page.geez = false;
+	$("#content").on("keyup", function (e) {});
 	page.render = async (obj, who) => {
 		if (who == "me") {
 			var mine = await gun.user().get("papers").get(obj.hash).get(obj.id);
 			mine?.content && $("#content").html(mine.content);
-			// mine?.title
-			// 	? $("#title").html(mine.title)
-			// 	: $("#title").html("Untitled");
 		} else {
 			gun.get("~" + obj.author)
 				.get("papers")
@@ -27,53 +26,46 @@ $(function () {
 			if (author === key.pub) {
 				// console.log("author, author is: ", author);
 				page.render({ id: page.id, hash: page.hash }, "me");
-				// Show Keyboard shortcuts
-				meta.edit({
-					combo: [-1, 16],
-					fake: -1,
-					on: async function (e) {
-						$(".key-none").toggle();
-					},
-				});
-				// Show Keyboard shortcuts
-				meta.edit({
-					combo: [-1, "G", 16],
-					fake: -1,
-					on: async function (e) {
-						$(".key-none").toggle();
-					},
-				});
-				// Show Keyboard shortcuts
-				meta.edit({
-					combo: [-1, 189, 16],
-					fake: -1,
-					on: async function (e) {
-						$(".key-none").toggle();
-					},
-				});
 
 				// Edit
 				meta.edit({
 					name: JOY.icon("pen-to-square", "solid", "E"),
 					combo: ["E"],
 					on: function () {
-						console.log("CLICKED");
-						$("#content").attr("contenteditable", true);
 						$("#content").focus();
-						// if ($(".editable").attr("contenteditable"))
-						// 	$(".editable").focus();
-						// $("article").attr(
-						// 	"contenteditable",
-						// 	"true" == $("article").attr("contenteditable")
-						// 		? false
-						// 		: true
-						// );
-						// $("header").attr(
-						// 	"contenteditable",
-						// 	"true" == $("header").attr("contenteditable")
-						// 		? false
-						// 		: true
-						// );
+						$("#content").attr(
+							"contenteditable",
+							"true" == $("#content").attr("contenteditable")
+								? false
+								: true
+						);
+					},
+					use: function () {},
+					up: function () {},
+				});
+				meta.edit({
+					name: JOY.icon("share", "solid", "S"),
+					combo: ["S"],
+					on: function () {
+						navigator.clipboard.writeText(location.href);
+					},
+					use: function () {},
+					up: function () {},
+				});
+				meta.edit({
+					name: JOY.icon("home", "solid", "H"),
+					combo: ["H"],
+					on: function () {
+						location.href = location.origin + "/";
+					},
+					use: function () {},
+					up: function () {},
+				});
+				meta.edit({
+					// name: JOY.icon("home", "solid", "H"),
+					combo: [-1, "H"],
+					on: function () {
+						location.href = location.origin + "/";
 					},
 					use: function () {},
 					up: function () {},
@@ -156,15 +148,9 @@ $(function () {
 	$(document).on(
 		"keyup",
 		"[contenteditable]",
-		page.wait(async function () {
-			// var hash = $("#hash").text();
+		page.wait(async function (e) {
 			var el = $(this);
 			var data = el.html();
-			console.log(data);
-			console.log(page.id, page.hash);
-
-			// var hash = await SEA.work(JOY.key().pub, null, null, {
-			// var what = await SEA.encrypt(data, page.pass);
 			await gun
 				.user()
 				.get("papers")
@@ -240,7 +226,7 @@ $(function () {
 	meta.edit(
 		(meta.text.it = {
 			combo: [-1],
-			on: function () {
+			on: function (e) {
 				m.list(this, true);
 				// console.log(m.list);
 			},
@@ -249,13 +235,6 @@ $(function () {
 	); // -1 is key for typing.
 	meta.text.it[-1] = meta.text.it;
 	document.execCommand("defaultParagraphSeparator", false, "p");
-	// Show Keyboard shortcuts
-	meta.edit({
-		combo: [16],
-		on: async function (e) {
-			$(".key-none").toggle();
-		},
-	});
 
 	// Exit to home
 	meta.edit({
@@ -265,217 +244,11 @@ $(function () {
 		},
 	});
 
-	meta.edit({
-		name: JOY.icon("eye-dropper", "solid", "C"),
-		combo: [-1, "C"],
-		fake: -1,
-		on: function (eve) {
-			meta.ask("Color or Hex", function (color) {
-				// if (!meta.text.editor("HiliteColor", false, colour)) {
-				meta.text.editor("foreColor", color, false);
-				// }
-			});
-		},
-		up: function () {},
-	});
-
-	// Quit editing
-	meta.edit({
-		name: JOY.icon("arrow-right-to-bracket", "solid", "Q"),
-		combo: [-1, "Q"],
-		fake: -1,
-		on: function (e) {
-			e.preventDefault();
-
-			$("#content").attr("contenteditable", "false");
-		},
-		use: function () {},
-		up: function () {},
-	});
-
-	// Bold
-	meta.edit({
-		name: JOY.icon("bold", "solid", "B"),
-		combo: [-1, "B"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("bold");
-		},
-		up: function () {},
-	});
-
-	// Italic
-	meta.edit({
-		name: JOY.icon("italic", "solid", "I"),
-		combo: [-1, "I"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("italic");
-		},
-		up: function () {},
-	});
-
-	// Strikethrough
-	meta.edit({
-		name: JOY.icon("strikethrough", "solid", "/"),
-		combo: [-1, 191],
-		// fake: -1,
-		on: function (eve) {
-			meta.text.editor("strikethrough");
-		},
-		up: function () {},
-	});
-
-	// Link
-	meta.edit({
-		name: JOY.icon("link", "solid", "K"),
-		combo: [-1, "K"],
-		fake: -1,
-		on: function (eve) {
-			var range = meta.text.range || monotype();
-			meta.ask("Paste or type link...", function (url) {
-				meta.text.editor({
-					tag: $('<a href="' + url + '">link</a>'),
-					edit: url ? "createLink" : "unlink",
-					as: url,
-					range: range,
-				});
-			});
-		},
-	});
-	// Show Align Menu
-	// meta.edit({ name: "aliGn", combo: [-1, "A"] }); // MOVE TO ADVANCED MENu!
-
-	// Indentation menu
-	// meta.edit({
-	// 	name: JOY.icon("indent", "solid", "Tab"),
-	// 	combo: [-1, ],
-	// 	fake: -1,
-	// 	on: function (eve) {
-	// 		// if (!meta.text.editor("HiliteColor", false, colour)) {
-	// 		meta.text.editor("indent");
-	// 	},
-	// 	up: function () {},
-	// });
-	// meta.edit({
-	// 	name: JOY.icon("outdent", "solid", "O"),
-	// 	combo: [-1, 16, 9],
-	// 	fake: [-1, 16],
-	// 	on: function (eve) {
-	// 		// if (!meta.text.editor("HiliteColor", false, colour)) {
-	// 		meta.text.editor("outdent");
-	// 	},
-	// 	up: function () {},
-	// });
-
-	// Space for paragraph
-
-	meta.edit({
-		name: JOY.icon("indent", "solid", "]"),
-		combo: [-1, 221],
-		fake: -1,
-		on: function (eve) {
-			// if (!meta.text.editor("HiliteColor", false, colour)) {
-
-			meta.text.editor("indent");
-		},
-		up: function () {},
-	});
-
-	meta.edit({
-		name: JOY.icon("outdent", "solid", "["),
-		combo: [-1, 219],
-		on: function (eve) {
-			// if (!meta.text.editor("HiliteColor", false, colour)) {
-
-			meta.text.editor("outdent");
-		},
-		up: function () {},
-	});
-
-	meta.edit({
-		name: JOY.icon("highlighter", "solid", "H"),
-		combo: [-1, "H"],
-		fake: -1,
-		on: function (eve) {
-			meta.ask("Color or Hex", function (color) {
-				// if (!meta.text.editor("HiliteColor", false, colour)) {
-				meta.text.editor("backColor", color);
-				// }
-			});
-		},
-		up: function () {},
-	});
-
-	// ADVANCED MENU
-	meta.edit({
-		name: JOY.icon("angle-right", "solid", "G"),
-		combo: [-1, "G"],
-		fake: -1,
-	});
-
-	meta.edit({
-		name: JOY.icon("list-ul", "solid", "="),
-		combo: [-1, "G", 187],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("insertunorderedlist");
-		},
-		up: function () {},
-	});
-	meta.edit({
-		name: JOY.icon("list-ol", "solid", "="),
-		combo: [-1, "G", 48],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("insertorderedlist");
-		},
-		up: function () {},
-	});
-	meta.edit({
-		name: JOY.icon("align-left", "solid", "L"),
-		combo: [-1, "G", "L"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyLeft");
-		},
-		up: function () {},
-	});
-	meta.edit({
-		name: JOY.icon("align-right", "solid", "R"),
-		combo: [-1, "G", "R"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyRight");
-		},
-		up: function () {},
-	});
-
-	meta.edit({
-		name: JOY.icon("align-center", "solid", "M"),
-		combo: [-1, "G", "M"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyCenter");
-		},
-		up: function () {},
-	});
-	meta.edit({
-		name: JOY.icon("align-justify", "solid", "J"),
-		combo: [-1, "G", "J"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyFull");
-		},
-		up: function () {},
-	});
-	// Align Number
-	// Align Points
-	// Align Strike
+	// Font size
 	meta.edit({
 		name: JOY.icon("font", "solid", "A"),
 		combo: [-1, "A"],
-		fake: -1,
+		// fake: -1,
 	});
 	meta.edit({
 		name: "Small",
@@ -513,6 +286,159 @@ $(function () {
 		},
 		up: function () {},
 	});
+
+	// Align
+	meta.edit({
+		name: JOY.icon("angle-right", "solid", "G"),
+		combo: [-1, "G"],
+	});
+	meta.edit({
+		name: JOY.icon("align-left", "solid", "L"),
+		combo: [-1, "G", "L"],
+		fake: -1,
+		on: function (eve) {
+			meta.text.editor("justifyLeft");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+	meta.edit({
+		name: JOY.icon("align-right", "solid", "R"),
+		combo: [-1, "G", "R"],
+		// fake: -1,
+		on: function (eve) {
+			meta.text.editor("justifyRight");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+
+	meta.edit({
+		name: JOY.icon("align-center", "solid", "M"),
+		combo: [-1, "G", "M"],
+		// fake: -1,
+		on: function (eve) {
+			meta.text.editor("justifyCenter");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+	meta.edit({
+		name: JOY.icon("align-justify", "solid", "J"),
+		combo: [-1, "G", "J"],
+		// fake: -1,
+		on: function (eve) {
+			meta.text.editor("justifyFull");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+
+	// Strikethrough
+	meta.edit({
+		name: JOY.icon("strikethrough", "solid", "S"),
+		combo: [-1, "S"],
+		fake: -1,
+		on: function (eve) {
+			// meta.text.editor("strikethrough");
+			var r = meta.text.range || monotype();
+			meta.text.editor({
+				tag: $("<strike>" + r + "</strike>"),
+			});
+		},
+		up: function () {},
+	});
+
+	// Bold
+	meta.edit({
+		name: JOY.icon("bold", "solid", "B"),
+		combo: [-1, "B"],
+		fake: -1,
+		on: function (eve) {
+			meta.text.editor("bold");
+		},
+		up: function () {},
+	});
+
+	// Italic
+	meta.edit({
+		name: JOY.icon("italic", "solid", "I"),
+		combo: [-1, "I"],
+		fake: -1,
+		on: function (eve) {
+			meta.text.editor("italic");
+		},
+		up: function () {},
+	});
+	// Blockquote
+
+	// Lists
+	meta.edit({
+		name: JOY.icon("list-ul", "solid", "-"),
+		combo: [-1, 189],
+		// fake: -1,
+		on: function (eve) {
+			console.log(eve);
+			meta.text.editor("insertunorderedlist");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+	meta.edit({
+		name: JOY.icon("list-ol", "solid", "0"),
+		combo: [-1, 48],
+		on: function (eve) {
+			meta.text.editor("insertorderedlist");
+		},
+		up: function () {
+			this.edit.fake = -1;
+		},
+	});
+
+	// Links
+	meta.edit({
+		name: JOY.icon("link", "solid", "K"),
+		combo: [-1, "K"],
+		fake: -1,
+		on: function (eve) {
+			var range = meta.text.range || monotype();
+			meta.ask("Paste link...", function (url) {
+				meta.text.editor({
+					tag: $('<a href="' + url + '">link</a>'),
+					edit: url ? "createLink" : "unlink",
+					as: url,
+					range: range,
+				});
+			});
+		},
+	});
+
+	// Images
+	meta.edit({
+		name: JOY.icon("image", "solid", "M"),
+		combo: [-1, "M"],
+		fake: -1,
+		on: function (eve) {
+			var range = meta.text.range || monotype();
+			meta.ask("Paste link...", function (url) {
+				meta.text.editor({
+					tag: $(
+						'<img class="center" src="' +
+							url +
+							'" alt="' +
+							range +
+							'" />'
+					),
+				});
+			});
+		},
+	});
+	// Code
 });
 
 /*

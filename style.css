@@ -24,8 +24,7 @@ span,
 form,
 button,
 input,
-textarea,
-img {
+textarea {
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -36,6 +35,11 @@ img {
 	font: inherit;
 }
 
+img {
+	border-radius: 0.75em;
+	width: 100%;
+	height: auto;
+}
 a,
 button,
 input,

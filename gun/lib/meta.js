@@ -132,19 +132,19 @@
 		}, 250); // necessary fix for weird bug glitch
 		$.each(l, function (i, k) {
 			$li = $("<li>").html(k.name);
-			$li.get(0).style.setProperty("--meta-key", i);
+			$li.get(0).style.setProperty("--meta-key", l.length - i);
 			$ul.append($li);
 		});
 		if (opt) {
 			m.flip(true);
 		}
-		// $ul.append(
-		// 	$("<li>")
-		// 		.html("&larr;")
-		// 		.one("click", function () {
-		// 			m.list((k.at = at.back));
-		// 		})
-		// );
+		let back = $("<li>")
+			.html("&larr;")
+			.one("click", function () {
+				m.list((k.at = at.back));
+			});
+		back.get(0).style.setProperty("--meta-key", 0);
+		$ul.append(back);
 	};
 	m.ask = function (help, cb) {
 		var $ul = $("#meta .meta-menu ul").empty();
