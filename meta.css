@@ -77,7 +77,7 @@
 	#meta {
 		display: block;
 		position: fixed;
-		bottom: 0;
+		bottom: 1em;
 		font-size: 14pt;
 		color: #707070;
 		text-align: center;
@@ -91,7 +91,7 @@
 		overflow: none;
 	}
 	#meta .meta-menu {
-		bottom: 0;
+		bottom: 1em;
 		animation: none;
 		animation-delay: 0ms;
 		overflow: none;
@@ -107,7 +107,7 @@
 	#meta .meta-menu ul {
 		list-style-type: none;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 	}
 	#meta .meta-menu ul li {
 		animation: none;

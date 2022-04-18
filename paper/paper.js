@@ -393,7 +393,10 @@ $(function () {
 		name: JOY.icon("list-ol", "solid", "0"),
 		combo: [-1, 48],
 		on: function (eve) {
-			meta.text.editor("insertorderedlist");
+			console.log("list-ol");
+			meta.text.editor({
+				tag: $("<ol><li></li></ol>"),
+			});
 		},
 		up: function () {
 			this.edit.fake = -1;
@@ -427,13 +430,9 @@ $(function () {
 			var range = meta.text.range || monotype();
 			meta.ask("Paste link...", function (url) {
 				meta.text.editor({
-					tag: $(
-						'<img class="center" src="' +
-							url +
-							'" alt="' +
-							range +
-							'" />'
-					),
+					tag: $('<img class="center" src="' + url + '" /><br />'),
+					range: range,
+					as: url,
 				});
 			});
 		},
