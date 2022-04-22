@@ -16,8 +16,8 @@ tml>
 <script>
 	// Thanks to https://github.com/dmcinnes/HTML5-Asteroids
 	//var gun = Gun();
-	var gun = Gun(location.host ? location.origin + '/gun' : 'http://localhost:8765/gun');
-	var game = { gun: gun.get('example/game/space'), area: {}, ships: {} };
+	var gun = JOY.gui();
+	var game = { gun: gun.get('example/game/space-astroids'), area: {}, ships: {} };
 	game.keys = { 38: 'up', 37: 'left', 39: 'right', 40: 'down', 32: 'space' };
 	$(document).on('keydown', function (e) {
 		//e.preventDefault();

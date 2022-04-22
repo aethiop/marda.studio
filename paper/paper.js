@@ -345,7 +345,7 @@ $(function () {
 	mediaQuery = window.matchMedia("only screen and (max-width: 600px)");
 	// Show only on desktop
 	if (!mediaQuery.matches) {
-		// Align
+		// Aligh
 		meta.edit({
 			name: JOY.icon("square", "solid", "G"),
 			combo: [-1, "G"],
@@ -421,14 +421,10 @@ $(function () {
 				this.edit.fake = -1;
 			},
 		});
-		meta.edit({
-			name: JOY.icon("photo-film", "solid", "M"),
-			combo: [-1, "M"],
-		});
 		// Images
 		meta.edit({
 			name: JOY.icon("image", "solid", "I"),
-			combo: [-1, "M", "I"],
+			combo: [-1, "I"],
 			fake: -1,
 			on: function (eve) {
 				var range = meta.text.range || monotype();
@@ -446,7 +442,7 @@ $(function () {
 
 		meta.edit({
 			name: JOY.icon("video", "solid", "V"),
-			combo: [-1, "M", "V"],
+			combo: [-1, "V"],
 			fake: -1,
 			on: function (eve) {
 				var range = meta.text.range || monotype();
