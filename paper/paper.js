@@ -421,10 +421,14 @@ $(function () {
 				this.edit.fake = -1;
 			},
 		});
+		meta.edit({
+			name: JOY.icon("photo-film", "solid", "X"),
+			combo: [-1, "X"],
+		});
 		// Images
 		meta.edit({
 			name: JOY.icon("image", "solid", "I"),
-			combo: [-1, "I"],
+			combo: [-1, "X", "I"],
 			fake: -1,
 			on: function (eve) {
 				var range = meta.text.range || monotype();
@@ -442,7 +446,7 @@ $(function () {
 
 		meta.edit({
 			name: JOY.icon("video", "solid", "V"),
-			combo: [-1, "V"],
+			combo: [-1, "X", "V"],
 			fake: -1,
 			on: function (eve) {
 				var range = meta.text.range || monotype();
