@@ -451,9 +451,11 @@ $(function () {
 			on: function (eve) {
 				var range = meta.text.range || monotype();
 				meta.ask("Paste link...", function (url) {
+					console.log(url);
 					let r =
 						/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
 					var id = url.match(r)[1];
+					console.log(id);
 					meta.text.editor({
 						tag: $(
 							`<section class='video'>
