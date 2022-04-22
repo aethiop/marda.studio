@@ -40,6 +40,16 @@ img {
 	width: 100%;
 	height: auto;
 }
+.video {
+	width: 100%;
+	height: 56.25%;
+}
+.video iframe {
+	position: absolute;
+	border-radius: 0.75em;
+	width: 100%;
+	height: 100%;
+}
 a,
 button,
 input,

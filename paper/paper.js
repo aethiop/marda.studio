@@ -423,8 +423,8 @@ $(function () {
 
 	// Images
 	meta.edit({
-		name: JOY.icon("image", "solid", "M"),
-		combo: [-1, "M"],
+		name: JOY.icon("image", "solid", "P"),
+		combo: [-1, "P"],
 		fake: -1,
 		on: function (eve) {
 			var range = meta.text.range || monotype();
@@ -433,6 +433,30 @@ $(function () {
 					tag: $('<img class="center" src="' + url + '" /><br />'),
 					range: range,
 					as: url,
+				});
+			});
+		},
+	});
+
+	meta.edit({
+		name: JOY.icon("video", "solid", "V"),
+		combo: [-1, "V"],
+		fake: -1,
+		on: function (eve) {
+			var range = meta.text.range || monotype();
+			meta.ask("Paste link...", function (url) {
+				let r =
+					/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+				var id = url.match(r)[1];
+				meta.text.editor({
+					tag: $(
+						`<section class='video'>
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+							</iframe>
+						</section>`
+					),
+					range: range || id,
+					as: id,
 				});
 			});
 		},

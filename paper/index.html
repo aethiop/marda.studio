@@ -16,6 +16,11 @@
       content: "Title";
       color: #737373;
     }
+
+    p:empty:not(:focus)::before {
+      content: "What's on your mind....";
+      color: #737373;
+    }
   </style>
 </head>
 
@@ -24,13 +29,12 @@
     <!-- <div id="header" class="unit row tint gap sap-sm act center">
       <h1 id="title" class="loud"></h1>
     </div> -->
-    <div id="content" class=" surfaces sap-sm focus gap" style="width: 95%">
+    <div id="content" class=" surfaces sap-sm focus" style="width: 95%; margin-top: 2%">
       <header>
         <h1 class="loud" id="title"></h1>
         <small id="last" contenteditable="false" class="unit row surfacet"></small>
       </header>
-
-      <section class="">
+      <section style="max-width: 100%">
         <p></p>
       </section>
     </div>
