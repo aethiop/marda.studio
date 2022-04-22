@@ -7,11 +7,11 @@ $(function () {
 		},
 	});
 
-	meta.edit({
-		name: JOY.icon("game", "solid", "G"),
-		combo: ["G"],
-		on: async function (e) {
-			location.href = location.origin + "/game/";
-		},
-	});
+	// meta.edit({
+	// 	name: JOY.icon("game", "solid", "G"),
+	// 	combo: ["G"],
+	// 	on: async function (e) {
+	// 		location.href = location.origin + "/game/";
+	// 	},
+	// });
 });

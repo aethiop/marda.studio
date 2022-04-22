@@ -138,8 +138,16 @@
 		if (opt) {
 			m.flip(true);
 		}
+
 		let back = $("<li>")
-			.html("&larr;")
+			.html(
+				`
+				<div style='display:flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 0.75em;'>
+					<p class='key-none'><kbd>&larr;</kbd></p>
+					<i class="fa-solid fa-solid fa-chevron-left"></i>
+				</div>
+			`
+			)
 			.one("click", function () {
 				m.list((k.at = at.back));
 			});

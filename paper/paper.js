@@ -287,57 +287,6 @@ $(function () {
 		up: function () {},
 	});
 
-	// Align
-	meta.edit({
-		name: JOY.icon("angle-right", "solid", "G"),
-		combo: [-1, "G"],
-	});
-	meta.edit({
-		name: JOY.icon("align-left", "solid", "L"),
-		combo: [-1, "G", "L"],
-		fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyLeft");
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-	meta.edit({
-		name: JOY.icon("align-right", "solid", "R"),
-		combo: [-1, "G", "R"],
-		// fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyRight");
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-
-	meta.edit({
-		name: JOY.icon("align-center", "solid", "M"),
-		combo: [-1, "G", "M"],
-		// fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyCenter");
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-	meta.edit({
-		name: JOY.icon("align-justify", "solid", "J"),
-		combo: [-1, "G", "J"],
-		// fake: -1,
-		on: function (eve) {
-			meta.text.editor("justifyFull");
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-
 	// Strikethrough
 	meta.edit({
 		name: JOY.icon("strikethrough", "solid", "S"),
@@ -376,33 +325,6 @@ $(function () {
 	});
 	// Blockquote
 
-	// Lists
-	meta.edit({
-		name: JOY.icon("list-ul", "solid", "-"),
-		combo: [-1, 189],
-		// fake: -1,
-		on: function (eve) {
-			console.log(eve);
-			meta.text.editor("insertunorderedlist");
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-	meta.edit({
-		name: JOY.icon("list-ol", "solid", "0"),
-		combo: [-1, 48],
-		on: function (eve) {
-			console.log("list-ol");
-			meta.text.editor({
-				tag: $("<ol><li></li></ol>"),
-			});
-		},
-		up: function () {
-			this.edit.fake = -1;
-		},
-	});
-
 	// Links
 	meta.edit({
 		name: JOY.icon("link", "solid", "K"),
@@ -420,47 +342,132 @@ $(function () {
 			});
 		},
 	});
+	mediaQuery = window.matchMedia("only screen and (max-width: 600px)");
+	// Show only on desktop
+	if (!mediaQuery.matches) {
+		// Align
+		meta.edit({
+			name: JOY.icon("square", "solid", "G"),
+			combo: [-1, "G"],
+		});
+		meta.edit({
+			name: JOY.icon("align-left", "solid", "L"),
+			combo: [-1, "G", "L"],
+			fake: -1,
+			on: function (eve) {
+				meta.text.editor("justifyLeft");
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
+		meta.edit({
+			name: JOY.icon("align-right", "solid", "R"),
+			combo: [-1, "G", "R"],
+			// fake: -1,
+			on: function (eve) {
+				meta.text.editor("justifyRight");
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
 
-	// Images
-	meta.edit({
-		name: JOY.icon("image", "solid", "P"),
-		combo: [-1, "P"],
-		fake: -1,
-		on: function (eve) {
-			var range = meta.text.range || monotype();
-			meta.ask("Paste link...", function (url) {
+		meta.edit({
+			name: JOY.icon("align-center", "solid", "M"),
+			combo: [-1, "G", "M"],
+			// fake: -1,
+			on: function (eve) {
+				meta.text.editor("justifyCenter");
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
+		meta.edit({
+			name: JOY.icon("align-justify", "solid", "J"),
+			combo: [-1, "G", "J"],
+			// fake: -1,
+			on: function (eve) {
+				meta.text.editor("justifyFull");
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
+		// Lists
+		meta.edit({
+			name: JOY.icon("list-ul", "solid", "-"),
+			combo: [-1, 189],
+			// fake: -1,
+			on: function (eve) {
+				console.log(eve);
+				meta.text.editor("insertunorderedlist");
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
+		meta.edit({
+			name: JOY.icon("list-ol", "solid", "0"),
+			combo: [-1, 48],
+			on: function (eve) {
+				console.log("list-ol");
 				meta.text.editor({
-					tag: $('<img class="center" src="' + url + '" /><br />'),
-					range: range,
-					as: url,
+					tag: $("<ol><li></li></ol>"),
 				});
-			});
-		},
-	});
+			},
+			up: function () {
+				this.edit.fake = -1;
+			},
+		});
+		meta.edit({
+			name: JOY.icon("photo-film", "solid", "M"),
+			combo: [-1, "M"],
+		});
+		// Images
+		meta.edit({
+			name: JOY.icon("image", "solid", "I"),
+			combo: [-1, "M", "I"],
+			fake: -1,
+			on: function (eve) {
+				var range = meta.text.range || monotype();
+				meta.ask("Paste link...", function (url) {
+					meta.text.editor({
+						tag: $(
+							'<img class="center" src="' + url + '" /><br />'
+						),
+						range: range,
+						as: url,
+					});
+				});
+			},
+		});
 
-	meta.edit({
-		name: JOY.icon("video", "solid", "V"),
-		combo: [-1, "V"],
-		fake: -1,
-		on: function (eve) {
-			var range = meta.text.range || monotype();
-			meta.ask("Paste link...", function (url) {
-				let r =
-					/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-				var id = url.match(r)[1];
-				meta.text.editor({
-					tag: $(
-						`<section class='video'>
+		meta.edit({
+			name: JOY.icon("video", "solid", "V"),
+			combo: [-1, "M", "V"],
+			fake: -1,
+			on: function (eve) {
+				var range = meta.text.range || monotype();
+				meta.ask("Paste link...", function (url) {
+					let r =
+						/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+					var id = url.match(r)[1];
+					meta.text.editor({
+						tag: $(
+							`<section class='video'>
 							<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 							</iframe>
 						</section>`
-					),
-					range: range || id,
-					as: id,
+						),
+						range: range || id,
+						as: id,
+					});
 				});
-			});
-		},
-	});
+			},
+		});
+	}
 	// Code
 });
 

@@ -91,12 +91,10 @@
 		overflow: none;
 	}
 	#meta .meta-menu {
-		bottom: 1em;
+		bottom: 0;
 		animation: none;
 		animation-delay: 0ms;
-		overflow: none;
 		position: absolute;
-		text-align: right;
 	}
 	#meta .meta-none {
 		display: block;
@@ -105,15 +103,19 @@
 		display: none;
 	}
 	#meta .meta-menu ul {
-		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		white-space: nowrap;
 		display: flex;
 		flex-direction: row;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 	#meta .meta-menu ul li {
 		animation: none;
 		animation-delay: 0ms;
-
-		display: inline-block;
+		display: inline;
 		padding: 0.5em;
 		font-size: 14pt;
 		border-radius: 0.75em;
