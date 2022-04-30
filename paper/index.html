@@ -12,6 +12,15 @@
   <link rel="stylesheet" href="../meta.css" />
   <script src="https://kit.fontawesome.com/478ca05d96.js" crossorigin="anonymous"></script>
   <style>
+    h1:empty:not(:focus)::before {
+      content: "Title";
+      color: #737373;
+    }
+
+    p:empty:not(:focus)::before {
+      content: "Begin typing...";
+      color: #737373;
+    }
   </style>
 </head>
 

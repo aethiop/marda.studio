@@ -346,6 +346,7 @@ $(function () {
 	// Show only on desktop
 	if (!mediaQuery.matches) {
 		// Aligh
+
 		meta.edit({
 			name: JOY.icon("square", "solid", "G"),
 			combo: [-1, "G"],
