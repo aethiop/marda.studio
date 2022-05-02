@@ -316,6 +316,9 @@ input {
 	-webkit-animation: hue 900s infinite;
 	animation: hue 900s infinite;
 }
+.paper:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+}
 @keyframes hue {
 	0% {
 		background-color: #4d79d8;

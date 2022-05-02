@@ -396,6 +396,24 @@ $(function () {
 				this.edit.fake = -1;
 			},
 		});
+		// Indent
+		meta.edit({
+			combo: [-1, 221],
+			fake: -1,
+			on: function (eve) {
+				meta.text.editor("indent");
+			},
+			up: function () {},
+		});
+		// Outdent
+		meta.edit({
+			combo: [-1, 160],
+			fake: -1,
+			on: function (eve) {
+				meta.text.editor("outdent");
+			},
+			up: function () {},
+		});
 		// Lists
 		meta.edit({
 			name: JOY.icon("list-ul", "solid", "-"),
@@ -414,9 +432,7 @@ $(function () {
 			combo: [-1, 48],
 			on: function (eve) {
 				console.log("list-ol");
-				meta.text.editor({
-					tag: $("<ol><li></li></ol>"),
-				});
+				meta.text.editor("insertorderedlist");
 			},
 			up: function () {
 				this.edit.fake = -1;
