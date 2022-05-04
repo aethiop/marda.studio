@@ -396,6 +396,24 @@ $(function () {
 				this.edit.fake = -1;
 			},
 		});
+		// Superscript
+		meta.edit({
+			combo: [-1, 54],
+			fake: -1,
+			on: function (eve) {
+				meta.text.editor("superscript");
+			},
+			up: function () {},
+		});
+		// Subscript
+		meta.edit({
+			combo: [-1, 53],
+			fake: -1,
+			on: function (eve) {
+				meta.text.editor("subscript");
+			},
+			up: function () {},
+		});
 		// Indent
 		meta.edit({
 			combo: [-1, 221],
