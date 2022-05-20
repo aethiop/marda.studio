@@ -97,7 +97,9 @@ p {
 p + p {
 	padding-top: 0;
 }
-
+table {
+	background-color: rgba(100%, 100%, 100%, 0.1);
+}
 [contenteditable="true"]:empty:before {
 	content: attr(placeholder);
 }
